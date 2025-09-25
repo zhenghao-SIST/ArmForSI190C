@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<robot name="my">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_robot/meshes/base.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+    <material name="custom_color">
+      <color rgba="1.0 1.0 1.0 1.0"/>  <!-- white-->
+    </material>
+    </visual>
+  </link>
+
+  <link name="link0">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_robot/meshes/joint1.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin xyz="0.0 0.0 1.6" rpy='0 0 3.1415'/>
+    <material name="custom_color">
+      <color rgba="1.0 1.0 1.0 1.0"/>  <!-- white-->
+    </material>
+    </visual>
+  </link>
+  <joint name="base_to_link0" type="continuous">
+    <parent link="base_link"/>
+    <child link="link0"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.0 0.0 0.0" rpy='0 0 0'/>
+  </joint>
+  <link name="link1">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_robot/meshes/joint2.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy='0 3.1415 1.5707'/>
+    <material name="custom_color">
+      <color rgba="1.0 1.0 1.0 1.0"/>  <!-- white-->
+    </material>
+    </visual>
+      <!--
+    <visual>
+      <geometry>
+        <box size="0.02 0.02 0.02"/>
+      </geometry>
+      <origin rpy="1.5707 0 0" xyz="0 0 0.11"/>
+    </visual>
+      -->
+  </link>
+  <joint name="link0_to_link1" type="continuous">
+    <parent link="link0"/>
+    <child link="link1"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.0 0.0 1.6" rpy='-1.5707 3.1415 0'/>
+  </joint>
+  <link name="link2">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_robot/meshes/joint3.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy='0 3.1415 0'/>
+    <material name="custom_color">
+      <color rgba="1.0 1.0 1.0 1.0"/>  <!-- white-->
+    </material>
+    </visual>
+  <!--
+    <visual>
+      <geometry>
+        <box size="0.6 0.1 0.1"/>
+      </geometry>
+      <origin rpy="0 1.5714 0" xyz="0.0 0 0.3"/>
+    </visual>
+    -->
+  </link>
+  <joint name="link1_to_link2" type="continuous">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="1.7 0.0 0.0" rpy = '0 0 0'/>
+  </joint>
+  <link name="link3">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_robot/meshes/joint4.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy='0 0 0'/>
+    <material name="custom_color">
+      <color rgba="1.0 1.0 1.0 1.0"/>  <!-- white-->
+    </material>
+    </visual>
+  </link>
+  <joint name="link2_to_link3" type="continuous">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.0 0.7 0.0" rpy = '-1.5708  0 1.5708'/>
+  </joint>
+  <link name="link4">
+    <visual>
+      <geometry>
+        <mesh filename="package://my_robot/meshes/joint5.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy='0 0 -1.5708'/>
+    <material name="custom_color">
+      <color rgba="1.0 1.0 1.0 1.0"/>  <!-- white-->
+    </material>
+    </visual>
+  </link>
+  <joint name="link3_to_link4" type="continuous">
+    <parent link="link3"/>
+    <child link="link4"/>
+    <axis xyz="0 0 1"/>
+   <origin xyz="0.0 0.0 1.1" rpy = '0 1.5707 -1.5707'/>
+  </joint>
+  <link name="link5">
+  </link>
+  <joint name="link4_to_link5" type="continuous">
+    <parent link="link4"/>
+    <child link="link5"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.0 0.9 0.0" rpy = '-1.5707 0 0'/>
+  </joint>
+</robot>
