@@ -5,10 +5,11 @@ from launch_ros.substitutions import FindPackageShare
 import os
 
 pkg_path = os.path.join(os.path.expanduser('~'), 'ros2_ws', 'src', 'my_robot_description')
-urdf_file = os.path.join(pkg_path, 'urdf', 'arm.xacro')
+urdf_file = os.path.join(pkg_path, 'urdf', 'my.urdf')
 
 
 def generate_launch_description():
+    print(urdf_file)
     ld = LaunchDescription()
 
     urdf_tutorial_path = FindPackageShare('urdf_tutorial')
@@ -24,7 +25,9 @@ def generate_launch_description():
     ld.add_action(rviz_arg)
 
     # This parameter has changed its meaning slightly from previous versions
-    ld.add_action(DeclareLaunchArgument(name='model', default_value="/home/sist/ros2_ws/src/my_robot/urdf/my.urdf",
+    pkg_path = FindPackageShare('my_robot')
+    urdf_path = PathJoinSubstitution([pkg_path, 'urdf', 'my.urdf'])
+    ld.add_action(DeclareLaunchArgument(name='model', default_value=urdf_path,
                                         description='Path to robot urdf file relative to urdf_tutorial package'))
 
     ld.add_action(IncludeLaunchDescription(
