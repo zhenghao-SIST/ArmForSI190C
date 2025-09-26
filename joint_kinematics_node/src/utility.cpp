@@ -4,11 +4,26 @@
  * Email: lizhenghao@shanghaitech.edu.cn
  * Institute: SIST
  * Created: 2025-05-08
- * Last Modified: 2025-09-25
+ * Last Modified: 2025-09-26
  */
 
 #include "utility/utility.hpp"
-#include <iostream>
+
+double angle_distance(double a, double b) {
+    const double TWO_PI = 2.0 * M_PI;
+    double d = std::fmod(std::fabs(a - b), TWO_PI);
+    if (d < 0) d += TWO_PI;
+    if (d > M_PI) d = TWO_PI - d;
+    return d;
+}
+
+double angle_diff_signed(double a, double b) {
+    const double TWO_PI = 2.0 * M_PI;
+    double d = std::fmod(a - b, TWO_PI);
+    if (d <= M_PI) d += TWO_PI;
+    else if (d >  M_PI) d -= TWO_PI;
+    return d;
+}
 
 void axisRange::set(double a, double b){
     left = a;

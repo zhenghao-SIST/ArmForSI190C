@@ -4,7 +4,7 @@
  * Email: lizhenghao@shanghaitech.edu.cn
  * Institute: SIST
  * Created: 2025-04-29
- * Last Modified: 2025-09-25
+ * Last Modified: 2025-09-26
  */
 
 #include "joint_kinematics_node/joint_kinematics_node.hpp"
@@ -202,9 +202,8 @@ void JointKinematicsNode::inverseKinematics(Eigen::Vector3d &v, Eigen::Quaternio
         }
 
 
-        RCLCPP_INFO(this->get_logger(), "full size %lu", candidate.size());
-        std::vector<uint8_t> score(candidate.size(), 0);
-        // How to select the best solution???
+        std::vector<double> score(candidate.size(), 0);
+        //TODO UPDATE How to select the best solution???
         for(size_t i = 0; i < candidate.size(); ++i){
             if(!flag[i])
                 continue;
@@ -216,13 +215,14 @@ void JointKinematicsNode::inverseKinematics(Eigen::Vector3d &v, Eigen::Quaternio
             dh_server.get_transform(tempT, candidate[i]);
             Eigen::Vector3d solvedEnd = tempT.topRightCorner(3,1);
             double dis = (solvedEnd - v).norm();
+            //Wrong Solution
             if(dis > 0.01){
                 score[i] = 1 / dis;
             }
             else{
                 double total_delta = 0.0;
                 for(size_t j = 0; j < candidate[i].size();++j){
-                    total_delta += fabs(normalizeAngle(candidate[i][j] - dh_server.get_delta(j)));
+                    total_delta += fabs(angle_distance(candidate[i][j], dh_server.get_delta(j)));
                 }
                 score[i] = 100 + 1 / total_delta;
             }

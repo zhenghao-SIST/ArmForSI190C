@@ -4,7 +4,7 @@
  * Email: lizhenghao@shanghaitech.edu.cn
  * Institute: SIST
  * Created: 2025-05-08
- * Last Modified: 2025-09-25
+ * Last Modified: 2025-09-26
  */
 
 #include <cmath>
@@ -34,4 +34,9 @@ double distance(double target, double angle);
 double normalizeAngle(double angle);
 
 double selectBest(std::vector<double> &angle, std::vector<double> &range, double current);
+
+double angle_distance(double a, double b);
+
+double angle_diff_signed(double a, double b);
+
 #endif
